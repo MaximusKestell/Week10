@@ -1,30 +1,49 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import WouldYouRather from './components/WouldYouRather.vue'
+
+import { ref } from 'vue'
+
+const wyrQuestion = ref('Live in a house shaped like a triangle or a house shaped like a circle?')
+const wyrAnswer1 = ref('Triangle House')
+const wyrAnswer2 = ref('Circle house')
+
+// this stores the users answer after they make a selection.
+
+const userSelection = ref('')
+
+function updateUserSelection(userChoice) {
+  userSelection.value = userChoice
+} // this is the function that gets the user choice from child
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+
+  <div id="app-component">
+
+    <h1>Would You Rather?</h1>
+
+    <WouldYouRather
+        v-bind:question="wyrQuestion"
+        v-bind:answer1="wyrAnswer1"
+        v-bind:answer2="wyrAnswer2"
+        v-on:answer-selected="updateUserSelection"
+    ></WouldYouRather>
+
+    <p>{{ userSelection }}</p>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+#app-component {
+  //font-size: 3em;
+  background-color: aqua;
+  padding: 40px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+p {
+  font-family: "Courier New", Courier, monospace;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>
